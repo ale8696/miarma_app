@@ -16,31 +16,68 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            Image.network('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/768px-Instagram_logo_2016.svg.png', height: 50),
-            Form(
-              child: Column(
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.blue))
-                    ),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.blue))
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: null,
-                    child: Text('Log'),
-                  )
-                ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: Image.network(
+                  'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/768px-Instagram_logo_2016.svg.png',
+                  height: 100),
               ),
-            )
-          ],
+              Form(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                          border: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.blue))
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 15),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                          border: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.blue))
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      style: ButtonStyle(fixedSize: MaterialStateProperty.all(Size(415, 60))),
+                      onPressed: null,
+                      child: Text('Log', style: TextStyle(fontSize: 20)),
+                    )
+                  ],
+                ),
+              ),
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  style: TextStyle(color: Colors.black),
+                  text: 'Has ',
+                  children: <TextSpan>[
+                    TextSpan(text: 'olvidado la contraseña', style: TextStyle(color: Colors.blue)),
+                    TextSpan(text: ' o '),
+                    TextSpan(text: 'no estas registrado', style: TextStyle(color: Colors.blue)),
+                    TextSpan(text: '?')
+                  ]
+                ),
+              ),
+              Row(
+                children: [
+                  Divider(indent: 123, height: 4, endIndent: 213, color: Colors.grey, thickness: 4,),
+                  Text('OR'),
+                  Divider()
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
