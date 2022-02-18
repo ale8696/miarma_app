@@ -28,12 +28,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 100),
               ),
               Form(
+                key: _formKey,
                 child: Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 15),
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                           border: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.blue))
                         ),
@@ -42,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 15),
                       child: TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                           border: OutlineInputBorder(borderSide: BorderSide(width: 1, color: Colors.blue))
                         ),
@@ -51,14 +52,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     ElevatedButton(
                       style: ButtonStyle(fixedSize: MaterialStateProperty.all(Size(415, 60))),
                       onPressed: null,
-                      child: Text('Log', style: TextStyle(fontSize: 20)),
+                      child: const Text('Log', style: TextStyle(fontSize: 20)),
                     )
                   ],
                 ),
               ),
               RichText(
                 textAlign: TextAlign.center,
-                text: TextSpan(
+                text: const TextSpan(
                   style: TextStyle(color: Colors.black),
                   text: 'Has ',
                   children: <TextSpan>[
@@ -69,13 +70,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ]
                 ),
               ),
-              Row(
-                children: [
-                  Divider(indent: 123, height: 4, endIndent: 213, color: Colors.grey, thickness: 4,),
-                  Text('OR'),
-                  Divider()
-                ],
-              )
             ],
           ),
         ),
