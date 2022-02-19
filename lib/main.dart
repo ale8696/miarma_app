@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:miarma_app/screens/home_screen.dart';
 import 'package:miarma_app/screens/login_screen.dart';
 import 'package:miarma_app/screens/profile_screen.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ProfileScreen(),
+      home: HomeScreen(),
     );
   }
 }
