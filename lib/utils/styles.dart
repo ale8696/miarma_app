@@ -11,6 +11,13 @@ class Styles {
 
 
   // TextStyle
+  
+  static TextStyle get registerTitle => GoogleFonts.getFont(
+    'Lato',
+    fontSize: 30,
+    color: Colors.grey
+  );
+
   static TextStyle get profileName => GoogleFonts.getFont(
     'Lato',
     fontSize: 14,
