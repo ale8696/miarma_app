@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:image_picker/image_picker.dart';
 
 part 'image_pick_event.dart';
 part 'image_pick_state.dart';
@@ -26,5 +29,7 @@ class ImagePickBloc extends Bloc<ImagePickEvent, ImagePickState> {
       emit(const ImageSelectedErrorState('Error in image selection'));
     }
   }
+
+
 
 }

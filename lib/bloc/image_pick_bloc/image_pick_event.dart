@@ -15,3 +15,13 @@ class SelectImageEvent extends ImagePickEvent {
   @override
   List<Object> get props => [source];
 }
+
+class ConfirmImageEvent extends ImagePickEvent {
+  final XFile pickedFile;
+
+  const ConfirmImageEvent(this.pickedFile);
+
+  @override
+  List<Object> get props => [pickedFile];
+  
+}

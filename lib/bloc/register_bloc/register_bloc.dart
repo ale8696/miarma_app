@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -19,7 +21,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   void _doRegisterEvent(DoRegisterEvent event, Emitter<RegisterState> emit) async {
     emit(RegisterLoadingState());
     try {
-      final registerResponse = await repository.register(event.registerDto);
+      final registerResponse = await repository.register(event.formData);
       emit(RegisterSuccessState(registerResponse));
       return;
     } on Exception catch (e) {
