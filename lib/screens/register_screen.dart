@@ -1,4 +1,5 @@
-import 'dart:io';
+import 'dart:convert';
+import 'dart:io' as io;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,7 +44,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => RegisterBloc(repository))],
+      providers: [BlocProvider(create: (context) => RegisterBloc(repository),
+        child: BlocProvider(create: (context) => ImagePickBloc(avatar)),
+      ),],
       child: _createBody(context),
     );
   }
@@ -216,7 +219,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       print('PATH ${state.pickedFile.path}');
                       return Column(children: [
                         Image.file(
-                          File(state.pickedFile.path),
+                          io.File(state.pickedFile.path),
                           height: 100,
                         ),
                         ElevatedButton(
@@ -263,8 +266,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       fechaDeNacimiento: fechaController.text,
                       isPrivado: isPrivate,
                     );
+
                     BlocProvider.of<RegisterBloc>(context)
-                        .add(DoRegisterEvent(registerDto));
+                        .add(DoRegisterEvent(registerDto, avatar!));
                   }
                 },
                 child: const Text('Log', style: TextStyle(fontSize: 20)),

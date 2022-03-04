@@ -10,8 +10,9 @@ abstract class RegisterEvent extends Equatable {
 }
 
 class DoRegisterEvent extends RegisterEvent {
-  final FormData formData;
+  final RegisterDto registerDto;
+  final XFile file;
 
-  const DoRegisterEvent(this.formData);
+  const DoRegisterEvent(this.registerDto, this.file);
   
 }

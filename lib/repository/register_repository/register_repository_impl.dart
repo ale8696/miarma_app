@@ -1,33 +1,35 @@
 import 'dart:convert';
-import 'dart:html';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:miarma_app/model/register/register_response.dart';
 import 'package:miarma_app/model/register/register_dto.dart';
 import 'package:miarma_app/repository/register_repository/register_repository.dart';
 
 class RegisterRepositoryImpl extends RegisterRepository {
-  final Client _client = Client();
 
   @override
-  Future<RegisterResponse> register(FormData formData) async {
+  Future<RegisterResponse> register(RegisterDto registerDto, XFile file) async {
 
-    Map<String, String> headers = {
-      'Content-Type': 'multipart/form-data'
-    };
+    var uri = Uri.parse('https:10.0.2.2:8080/auth/register/usuario');
+    var request = http.MultipartRequest('POST', uri);
+    request.files.add(
+      await http.MultipartFile.fromPath(
+        'file',
+        file.path
+      )
+    );
+    var registerJson = jsonEncode(registerDto.toJson());
+    request.fields['usuario'] = registerJson;
+    var response = await request.send();
 
-    final response = await Future.delayed(const Duration(milliseconds: 4000), () {
-      return _client.post(Uri.parse('https:10.0.2.2:8080/auth/register/usuario'),
-        headers: headers,
-        body: formData);
-    });
     if (response.statusCode == 200) {
-      return RegisterResponse.fromJson(json.decode(response.body));
+      return RegisterResponse.fromJson(json.decode(response.stream.toString()));
     } else {
-      throw Exception('Fail to register');
+      throw Exception('Fail to login');
     }
 
   }
-  
+
 }

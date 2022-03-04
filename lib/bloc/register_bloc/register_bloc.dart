@@ -1,7 +1,8 @@
-import 'dart:html';
+
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:miarma_app/model/register/register_dto.dart';
 import 'package:miarma_app/model/register/register_response.dart';
@@ -21,7 +22,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   void _doRegisterEvent(DoRegisterEvent event, Emitter<RegisterState> emit) async {
     emit(RegisterLoadingState());
     try {
-      final registerResponse = await repository.register(event.formData);
+      final registerResponse = await repository.register(event.registerDto, event.file);
       emit(RegisterSuccessState(registerResponse));
       return;
     } on Exception catch (e) {
