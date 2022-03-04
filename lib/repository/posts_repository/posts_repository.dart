@@ -1,3 +1,5 @@
+import 'package:miarma_app/model/posts/post_response.dart';
+
 abstract class PostsRepository {
-  void fetchPosts();
+  Future<List<Post>> fetchPosts();
 }

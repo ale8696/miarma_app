@@ -5,7 +5,6 @@ import 'package:miarma_app/screens/profile_screen.dart';
 import 'package:miarma_app/screens/register_screen.dart';
 import 'package:miarma_app/screens/search_screen.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RegisterScreen(),
+      home: HomeScreen(),
     );
   }
 }

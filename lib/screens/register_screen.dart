@@ -44,9 +44,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => RegisterBloc(repository),
-        child: BlocProvider(create: (context) => ImagePickBloc(avatar)),
-      ),],
+      providers: [
+        BlocProvider(create: (context) => RegisterBloc(repository)),
+        BlocProvider(create: (context) => ImagePickBloc())
+      ],
       child: _createBody(context),
     );
   }
@@ -281,6 +282,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void _showSnackbar(BuildContext context, String message) {
+    print(message);
     final snackBar = SnackBar(
       content: Text(message),
     );
