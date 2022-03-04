@@ -14,7 +14,8 @@ class RegisterRepositoryImpl extends RegisterRepository {
     var registerJson = jsonEncode(registerDto.toJson());
     var uri = Uri.parse('http://10.0.2.2:8080/auth/register/usuario');
     var request = http.MultipartRequest('POST', uri);
-    request.files.add(await http.MultipartFile.fromPath('file', file.path));
+    request.files.add(await http.MultipartFile.fromPath('file', file.path,
+        filename: file.name));
     request.files.add(http.MultipartFile.fromString('usuario', registerJson,
         contentType: MediaType('application', 'json')));
     var response = await request.send();
