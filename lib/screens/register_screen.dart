@@ -10,6 +10,7 @@ import 'package:miarma_app/model/register/register_dto.dart';
 import 'package:miarma_app/repository/register_repository/register_repository.dart';
 import 'package:miarma_app/repository/register_repository/register_repository_impl.dart';
 import 'package:miarma_app/screens/home_screen.dart';
+import 'package:miarma_app/utils/preferences.dart';
 import 'package:miarma_app/utils/styles.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -64,8 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             },
             listener: (context, state) {
               if (state is RegisterSuccessState) {
-                // SharedPreferences aqui!!
-
+                setToken(state.registerResponse.tokenJwt);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const HomeScreen()),
@@ -279,6 +279,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ],
     );
+  }
+
+  Future<void> setToken(String token) async {
+    await PreferenceUtils.init();
+    await PreferenceUtils.setString('token', token);
   }
 
   void _showSnackbar(BuildContext context, String message) {

@@ -63,8 +63,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 BlocBuilder<PostsBloc, PostsState>(
                   builder: (context, state) {
                     if (state is PostsFetched) {
-                      return _buildPostList(state.posts);
+                      _buildPostList(state.posts);
+                    } else if (state is PostsFetchError) {
+                      _showSnackbar(context, state.message);
                     }
+                    return const Center(child: CircularProgressIndicator());
                   },
                 )
               ],
@@ -115,14 +118,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Image.network('post.fotoPerfil'),
+                    Image.network('post.fotoPerfil'
+                        .replaceFirst('localhost', '10.0.2.2')),
                     Padding(
                       padding: const EdgeInsets.only(left: 8),
                       child: Text(post.nick),
                     ),
                   ],
                 ),
-                Icon(Icons.menu)
+                const Icon(Icons.menu)
               ],
             ),
           ),
@@ -130,5 +134,13 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
+  }
+
+  void _showSnackbar(BuildContext context, String message) {
+    print(message);
+    final snackBar = SnackBar(
+      content: Text(message),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
